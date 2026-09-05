@@ -11,97 +11,99 @@ The project implements and compares four densest-subgraph algorithms:
 3. **Goldberg's Exact Max-Flow Algorithm**
 4. **Exact Triangle-Density Densest Subgraph**
 
-The system evaluates solution quality, runtime scalability, memory behavior, exact-safe preprocessing, and real-time algorithm visualization.
+The system evaluates solution quality, runtime scalability, memory behavior, exact-safe preprocessing, computational growth, and real-time algorithm visualization.
 
 ---
 
 ## 1. Problem Definition
 
-For the ordinary Densest Subgraph Problem, DensiScope maximizes:
-
+For the ordinary **Densest Subgraph Problem (DSP)**, DensiScope maximizes:
 
 $$
 \rho(S)=\frac{|E(S)|}{|V(S)|}
 $$
 
-
 where:
 
-- \(V(S)\) is the set of vertices in the selected subgraph
-- \(E(S)\) is the set of edges inside the selected subgraph
+- $V(S)$ is the set of vertices in the selected subgraph.
+- $E(S)$ is the set of edges inside the selected subgraph.
 
 For triangle-density optimization, the objective is:
 
-\[
+$$
 \tau(S)=\frac{T(S)}{|V(S)|}
-\]
+$$
 
-where \(T(S)\) is the number of triangles completely contained inside the selected subgraph.
+where $T(S)$ is the number of triangles completely contained inside the selected subgraph.
 
-This allows the project to compare ordinary edge concentration with higher-order structural cohesion.
+This allows DensiScope to compare ordinary **edge concentration** with higher-order **triangle-based structural cohesion**.
 
 ---
 
 ## 2. Algorithms
 
-### Charikar
+### 2.1 Charikar's Greedy Peeling Algorithm
 
-Charikar repeatedly removes the minimum-degree vertex while tracking the densest intermediate subgraph.
+Charikar's algorithm repeatedly removes the minimum-degree vertex while tracking the densest intermediate subgraph encountered during the peeling process.
 
-It provides a fast approximation and acts as the project's scalable baseline.
+It is computationally efficient and acts as the scalable baseline of the project.
 
 ---
 
-### Greedy++
+### 2.2 Greedy++
 
 Greedy++ extends greedy peeling across multiple rounds.
 
-The priority of a vertex depends on:
+During each round, the priority of a vertex depends on:
 
-\[
-\text{load}(v)+\text{current degree}(v)
-\]
+$$
+\text{priority}(v)=\text{load}(v)+\text{current degree}(v)
+$$
 
-The load stores information from previous peeling rounds.
+The load stores information accumulated from previous peeling rounds.
 
-The experiments use **10 Greedy++ rounds**.
+The experiments in DensiScope use **10 Greedy++ rounds**.
 
----
-
-### Goldberg Exact
-
-Goldberg solves the ordinary edge-density problem exactly using:
-
-- Binary search over density
-- Max-flow / min-cut decision problems
-
-DensiScope improves its scalability using an **exact-safe core reduction** before constructing the flow network.
+Greedy++ generally requires more runtime than Charikar, but it can return a denser solution when the ordinary greedy method misses the optimum.
 
 ---
 
-### Exact Triangle Density
+### 2.3 Goldberg Exact Algorithm
 
-This algorithm maximizes:
+Goldberg's algorithm solves the ordinary edge-density densest subgraph problem exactly using:
 
-\[
-\frac{\text{number of triangles}}{\text{number of vertices}}
-\]
+- Binary search over candidate density values.
+- Max-flow / min-cut decision problems.
 
-DensiScope combines:
+To improve scalability, DensiScope applies an **exact-safe core reduction** before constructing the flow network.
 
-- Triangle-core preprocessing
-- Triangle greedy lower bounds
-- Triangle-component decomposition
-- Structural optimality certificates
-- Max-flow / min-cut when required
+This reduction removes vertices that cannot belong to a solution better than the current lower bound while preserving the global optimum.
 
-This allows large triangle-density instances to be solved without unnecessarily creating enormous flow networks.
+---
+
+### 2.4 Exact Triangle-Density Algorithm
+
+The triangle-density algorithm maximizes:
+
+$$
+\tau(S)=\frac{\text{number of triangles in }S}{|V(S)|}
+$$
+
+DensiScope combines several techniques:
+
+- Triangle-core preprocessing.
+- Triangle greedy lower bounds.
+- Triangle-component decomposition.
+- Structural optimality certificates.
+- Max-flow / min-cut when required.
+
+These techniques allow large triangle-density instances to be solved without unnecessarily constructing extremely large auxiliary flow networks.
 
 ---
 
 ## 3. Datasets
 
-Five real collaboration networks are evaluated.
+DensiScope evaluates five real-world collaboration networks.
 
 | Dataset | Vertices | Edges |
 |---|---:|---:|
@@ -111,7 +113,9 @@ Five real collaboration networks are evaluated.
 | ca-HepTh | 11,204 | 117,619 |
 | ca-dblp-2012 | 317,080 | 1,049,866 |
 
-Graphs are stored using memory-efficient **SciPy CSR sparse matrices**.
+The graphs are stored using memory-efficient **SciPy CSR sparse matrices**.
+
+Large raw and processed datasets are intentionally not stored in this GitHub repository. They are downloaded and prepared automatically by the notebook when required.
 
 ---
 
@@ -119,18 +123,18 @@ Graphs are stored using memory-efficient **SciPy CSR sparse matrices**.
 
 ### ca-netscience
 
-All edge-density algorithms found:
+All three edge-density algorithms found:
 
-- 9 vertices
-- 36 edges
-- Edge density = **4.0**
+- **9 vertices**
+- **36 edges**
+- Edge density = **4.000000**
 
-The returned structure is a complete \(K_9\).
+The returned structure is a complete graph, $K_9$.
 
 Exact Triangle Density found:
 
-- 9 vertices
-- 84 triangles
+- **9 vertices**
+- **84 triangles**
 - Triangle density = **9.333333**
 
 ---
@@ -139,50 +143,50 @@ Exact Triangle Density found:
 
 Charikar:
 
-- Edge density = **1.25**
+- Edge density = **1.250000**
 
 Greedy++:
 
-- Edge density = **1.50**
+- Edge density = **1.500000**
 
 Goldberg Exact:
 
-- Exact edge density = **1.50**
+- Exact edge density = **1.500000**
 
-This demonstrates a case where Greedy++ improves on Charikar and reaches the exact optimum.
+This dataset demonstrates a case where **Greedy++ improves on Charikar and reaches the exact Goldberg optimum**.
 
 ---
 
 ### ca-GrQc
 
-Charikar, Greedy++, and Goldberg all found:
+Charikar, Greedy++, and Goldberg Exact all found:
 
-- 46 vertices
-- 1,030 edges
+- **46 vertices**
+- **1,030 edges**
 - Edge density = **22.391304**
 
-Exact Triangle Density found triangle density:
+Exact Triangle Density found:
 
-- **325.347826**
+- Triangle density = **325.347826**
 
 ---
 
 ### ca-HepTh
 
-All edge-density algorithms found:
+All three edge-density algorithms found:
 
-- 239 vertices
-- 28,441 edges
-- Edge density = **119**
+- **239 vertices**
+- **28,441 edges**
+- Edge density = **119.000000**
 
-The returned graph is a complete \(K_{239}\).
+The returned graph is a complete $K_{239}$.
 
 Exact Triangle Density found:
 
-- 2,246,839 triangles
-- Triangle density = **9,401**
+- **2,246,839 triangles**
+- Triangle density = **9,401.000000**
 
-The complete-core structure provides an exact certificate without requiring the large triangle max-flow construction.
+The complete-core structure provides an exact certificate without requiring construction of a large triangle max-flow network.
 
 ---
 
@@ -190,179 +194,316 @@ The complete-core structure provides an exact certificate without requiring the 
 
 Original graph:
 
-- 317,080 vertices
-- 1,049,866 edges
+- **317,080 vertices**
+- **1,049,866 edges**
 
 Charikar:
 
-- 114 vertices
-- 6,441 edges
+- **114 vertices**
+- **6,441 edges**
 - Edge density = **56.500000**
 
 Greedy++:
 
-- 115 vertices
-- 6,505 edges
+- **115 vertices**
+- **6,505 edges**
 - Edge density = **56.565217**
 
 Goldberg Exact:
 
-- 115 vertices
-- 6,505 edges
+- **115 vertices**
+- **6,505 edges**
 - Exact edge density = **56.565217**
 
 Exact Triangle Density:
 
-- 114 vertices
-- 6,441 edges
+- **114 vertices**
+- **6,441 edges**
 - Triangle density = **2109.333333**
 
-This shows that edge-density and triangle-density optimization can prefer different communities.
+This result demonstrates that **edge-density optimization and triangle-density optimization can prefer different communities in the same network**.
 
 ---
 
 ## 5. Exact-Safe Preprocessing
 
-A major scalability improvement in DensiScope is the use of mathematically safe preprocessing.
+A major scalability improvement in DensiScope is the use of mathematically safe preprocessing before expensive exact optimization.
 
-For Goldberg Exact, DBLP is reduced from:
+For Goldberg Exact on `ca-dblp-2012`, the graph is reduced from:
 
 - **317,080 → 280 vertices**
 - **1,049,866 → 13,609 edges**
 
-This removes approximately **99.91% of the vertices** before max-flow while preserving the global optimum.
+This removes approximately **99.91% of the original vertices** before max-flow while preserving the exact global optimum.
 
-The same strategy substantially reduces the other datasets as well.
+The same strategy also substantially reduces the search space on the other datasets.
+
+This is particularly important in Google Colab, where memory and runtime are limited.
 
 ---
 
 ## 6. Triangle Exact Certificates
 
-DensiScope avoids constructing unnecessary large triangle-flow networks whenever the optimum can already be certified.
+DensiScope avoids constructing unnecessary large triangle-flow networks whenever the optimum can already be proven using a structural certificate.
 
 ### ca-HepTh
 
-The safe triangle core is a complete \(K_{239}\).
+The safe triangle core is a complete $K_{239}$.
 
-Therefore the optimum is directly certified.
+Therefore, its triangle-density optimum can be certified directly.
 
 ### ca-dblp-2012
 
-A feasible triangle-density lower bound and a mathematically valid component upper bound both equal:
+For DBLP, the feasible triangle-density lower bound and a mathematically valid component upper bound both equal:
 
-\[
+$$
 2109.333333
-\]
+$$
 
-Therefore the DBLP triangle optimum is exactly certified without building the full auxiliary max-flow network.
+Because the lower and upper bounds match, the DBLP triangle-density optimum is certified exactly without constructing the full auxiliary max-flow network.
 
 ---
 
 ## 7. Approximation Quality
 
-Goldberg Exact is used as the reference optimum for ordinary edge-density DSP.
+Goldberg Exact is used as the reference optimum for the ordinary edge-density Densest Subgraph Problem.
 
-The experiments show:
+The experiments demonstrate that:
 
-- Charikar is extremely fast and often reaches the exact optimum.
-- Greedy++ can improve Charikar when Charikar misses the optimum.
-- Greedy++ requires substantially more runtime because it performs repeated peeling rounds.
+- **Charikar** is extremely fast and often reaches the exact optimum.
+- **Greedy++** can improve the solution when Charikar misses the optimum.
+- **Goldberg Exact** provides the reference optimal edge-density solution.
+- Greedy++ requires more runtime because it performs multiple peeling rounds.
 
-Examples:
+Two important examples are:
 
-- `ca-CSphd`: Charikar = 1.25, Greedy++ = Exact = 1.50
-- `ca-dblp-2012`: Charikar = 56.50, Greedy++ = Exact = 56.565217
+| Dataset | Charikar | Greedy++ | Goldberg Exact |
+|---|---:|---:|---:|
+| ca-CSphd | 1.250000 | 1.500000 | 1.500000 |
+| ca-dblp-2012 | 56.500000 | 56.565217 | 56.565217 |
+
+These experiments show the trade-off between **speed and solution quality**.
 
 ---
 
-## 8. Scalability Analysis
+## 8. Computational Growth and Scalability
 
-DensiScope produces experimental growth plots for:
+DensiScope experimentally studies how algorithm runtime changes as the network size increases.
 
-- Runtime vs number of vertices
-- Runtime vs number of edges
-- Approximation quality vs Goldberg Exact
-- Additional peak RAM usage
-- Exact-safe preprocessing reduction
+The generated analysis includes:
 
-Logarithmic axes are used for runtime growth because the datasets range from hundreds to hundreds of thousands of vertices.
+- Runtime vs number of vertices.
+- Runtime vs number of edges.
+- Approximation quality vs Goldberg Exact.
+- Additional peak RAM usage.
+- Exact-safe preprocessing reduction.
+- Comparison of approximate and exact algorithms.
 
-Exact-method end-to-end runtime includes the prerequisite Charikar lower-bound computation.
+Logarithmic axes are used for runtime-growth plots because the evaluated datasets range from hundreds to hundreds of thousands of vertices.
+
+For exact methods, the reported end-to-end runtime includes prerequisite computations such as the Charikar lower-bound phase.
+
+Generated plots are available in the [`figures/`](figures/) directory.
 
 ---
 
 ## 9. Visualization
 
-DensiScope includes several visualization modes:
+DensiScope includes multiple visualization modes to demonstrate how the algorithms operate.
 
-- Live Charikar peeling
-- Live Greedy++ peeling
-- Goldberg binary-search convergence
-- Exact Triangle binary-search convergence
-- MP4 algorithm animations
-- Dataset comparison videos
-- Interactive dataset/algorithm dashboard
+These include:
 
-For extremely dense returned subgraphs, only a subset of edges may be **displayed** for readability.
+- Live Charikar peeling.
+- Live Greedy++ peeling.
+- Goldberg binary-search convergence.
+- Exact Triangle binary-search convergence.
+- MP4 algorithm animations.
+- Dataset comparison videos.
+- Interactive dataset and algorithm exploration.
 
-All reported metrics always use the complete, unsampled solution graph.
+Generated videos are available in the [`videos/`](videos/) directory.
+
+For extremely dense returned subgraphs, only a subset of edges may be **displayed** to maintain visual readability.
+
+This affects visualization only.
+
+**All reported numerical metrics are always calculated using the complete, unsampled solution graph.**
 
 ---
 
 ## 10. Interactive DensiScope Explorer
 
-The Colab notebook contains an interactive dashboard that allows the user to select:
+The Google Colab notebook contains an interactive dashboard for exploring the experimental results.
 
-- Dataset
-- Algorithm
-- Whether vertex IDs are displayed
+The user can select:
+
+- Dataset.
+- Algorithm.
+- Whether vertex IDs should be displayed.
 
 The dashboard dynamically displays:
 
-- Original graph size
-- Returned dense-subgraph size
-- Edge density
-- Triangle density when applicable
-- Approximation quality
-- End-to-end runtime
-- Solver mode
+- Original graph size.
+- Returned dense-subgraph size.
+- Number of returned edges.
+- Edge density.
+- Triangle density when applicable.
+- Approximation quality.
+- End-to-end runtime.
+- Solver mode.
+- Visualization of the returned dense community.
+
+This provides a real-time interactive interface for comparing the different algorithms and datasets.
 
 ---
 
 ## 11. Memory Efficiency
 
-The project is designed for Google Colab.
+DensiScope is specifically designed to run within the resource limits of **Google Colab**.
 
-Key memory-management strategies include:
+Memory-management strategies include:
 
-- SciPy CSR sparse matrices
-- One dataset loaded at a time
-- Explicit garbage collection
-- Compact NumPy integer arrays
-- Indexed heaps without stale entries
-- Triangle counting without storing triangles initially
-- Exact-safe graph reductions
-- Structural certificates before expensive max-flow
-- Visualization only on returned dense communities for huge graphs
+- SciPy CSR sparse matrices.
+- Loading one large dataset at a time.
+- Explicit garbage collection.
+- Compact NumPy integer arrays.
+- Indexed heaps without stale heap entries.
+- Triangle counting without initially storing every triangle.
+- Exact-safe graph reductions.
+- Structural certificates before expensive max-flow.
+- Visualization focused on returned dense communities for very large graphs.
+
+These optimizations allow experiments on networks containing more than **300,000 vertices and one million edges**.
 
 ---
 
-## 12. Project Structure
+## 12. Repository Structure
 
 ```text
 DensiScope/
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── figures/
-│
-├── videos/
-│
-├── results/
-│   ├── tables/
-│   └── solutions/
 │
 ├── DensiScope_FINAL.ipynb
+│   Main Google Colab notebook containing the complete implementation,
+│   experiments, benchmarking, and interactive visualization.
+│
 ├── README.md
-└── requirements.txt
+│   Project documentation and experimental summary.
+│
+├── requirements.txt
+│   Python package dependencies.
+│
+├── .gitignore
+│   Prevents large datasets and temporary files from being committed.
+│
+├── figures/
+│   Experimental plots and computational-growth figures.
+│
+├── results/
+│   Benchmark tables and generated solution files.
+│
+└── videos/
+    Algorithm animations and visualization outputs.
+```
+
+The `data/` directory is generated locally during execution and is intentionally excluded from the repository to avoid storing large downloaded datasets on GitHub.
+
+---
+
+## 13. Running DensiScope
+
+The recommended environment is **Google Colab**.
+
+### Step 1 — Open the notebook
+
+Open:
+
+```text
+DensiScope_FINAL.ipynb
+```
+
+in Google Colab.
+
+### Step 2 — Install dependencies
+
+The required Python packages are listed in:
+
+```text
+requirements.txt
+```
+
+The notebook also installs or verifies the required dependencies automatically where necessary.
+
+### Step 3 — Run the notebook
+
+In Colab, select:
+
+```text
+Runtime → Run all
+```
+
+The notebook will:
+
+1. Prepare the required collaboration datasets.
+2. Build memory-efficient sparse graph representations.
+3. Run Charikar.
+4. Run Greedy++.
+5. Run Goldberg Exact.
+6. Run Exact Triangle Density.
+7. Generate benchmark tables.
+8. Generate scalability and approximation plots.
+9. Generate algorithm visualizations and videos.
+10. Display the interactive DensiScope Explorer.
+
+For the largest datasets, execution may require additional time because exact algorithms and triangle computations are significantly more expensive than approximation algorithms.
+
+---
+
+## 14. Generated Outputs
+
+The final execution produces several types of output.
+
+### Figures
+
+Stored in:
+
+```text
+figures/
+```
+
+These include runtime growth, memory behavior, approximation quality, and preprocessing comparisons.
+
+### Results
+
+Stored in:
+
+```text
+results/
+```
+
+These contain benchmark measurements and algorithm solution information.
+
+### Videos
+
+Stored in:
+
+```text
+videos/
+```
+
+These demonstrate algorithm progress and dense-subgraph discovery visually.
+
+---
+
+## 15. Key Conclusions
+
+The experiments demonstrate several important algorithmic trade-offs:
+
+- **Charikar** provides an excellent speed/quality trade-off and frequently reaches the exact optimum.
+- **Greedy++** can improve solution quality when ordinary greedy peeling misses the optimum.
+- **Goldberg Exact** provides exact edge-density solutions but requires more computational resources.
+- **Exact Triangle Density** identifies communities with strong higher-order cohesion that may differ from edge-density solutions.
+- **Exact-safe preprocessing** can reduce extremely large networks to very small exact search spaces.
+- **Structural certificates** can eliminate the need for expensive flow-network construction.
+- Sparse graph representations and memory-aware implementation make large-scale experiments practical in Google Colab.
+
+Overall, DensiScope demonstrates how approximation algorithms, exact algorithms, graph preprocessing, sparse data structures, and visualization can be combined to analyze dense structures in large real-world collaboration networks.
