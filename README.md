@@ -19,9 +19,11 @@ The system evaluates solution quality, runtime scalability, memory behavior, exa
 
 For the ordinary Densest Subgraph Problem, DensiScope maximizes:
 
-\[
+
+$$
 \rho(S)=\frac{|E(S)|}{|V(S)|}
-\]
+$$
+
 
 where:
 
