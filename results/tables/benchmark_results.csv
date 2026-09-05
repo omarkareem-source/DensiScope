@@ -1,0 +1,5 @@
+dataset,algorithm,original_nodes,original_edges,result_nodes,result_edges,edge_density,runtime_seconds,best_iteration,best_round,flow_calls,objective,original_triangles,result_triangles,triangle_density
+ca-netscience,Charikar,379,914,9,36,4.0,0.0042234900001858,370.0,,,,,,
+ca-netscience,Greedy++,379,914,9,36,4.0,0.0868163140003162,370.0,1.0,,,,,
+ca-netscience,Goldberg Exact,379,914,9,36,4.0,0.0705574550001983,,,21.0,,,,
+ca-netscience,Exact Triangle Density,379,914,9,36,4.0,0.08831398399979662,,,22.0,triangle_density,921.0,84.0,9.333333333333334

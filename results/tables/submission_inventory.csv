@@ -1,0 +1,49 @@
+Category,File,Size (MB)
+Results Table,approximation_quality.csv,0.00069427490234375
+Results Table,benchmark_results.csv,0.0005254745483398438
+Results Table,dataset_manifest.csv,0.0010700225830078125
+Results Table,fast_algorithm_benchmarks.csv,0.0014600753784179688
+Results Table,final_all_algorithms.csv,0.0015726089477539062
+Results Table,final_benchmark_master.csv,0.0032663345336914062
+Results Table,goldberg_exact_benchmarks.csv,0.001312255859375
+Results Table,goldberg_reduction_preview.csv,0.0007944107055664062
+Results Table,key_findings.csv,0.0007905960083007812
+Results Table,presentation_summary.csv,0.000476837158203125
+Results Table,submission_inventory.csv,0.0025882720947265625
+Results Table,triangle_exact_benchmarks.csv,0.0013580322265625
+Results Table,triangle_reduction_preview.csv,0.0010747909545898438
+Figure,approximation_quality.png,0.15091896057128906
+Figure,goldberg_safe_reduction.png,0.0973062515258789
+Figure,memory_vs_nodes.png,0.12790203094482422
+Figure,runtime_vs_edges.png,0.16658782958984375
+Figure,runtime_vs_nodes.png,0.16870975494384766
+Video,ca-CSphd_algorithm_comparison.mp4,0.1040658950805664
+Video,ca-GrQc_algorithm_comparison.mp4,0.25485801696777344
+Video,ca-HepTh_algorithm_comparison.mp4,0.15472126007080078
+Video,ca-dblp-2012_algorithm_comparison.mp4,0.18634796142578125
+Video,ca-netscience_algorithm_comparison.mp4,0.15855026245117188
+Video,ca-netscience_charikar.mp4,0.46045875549316406
+Video,ca-netscience_goldberg_exact.mp4,0.16220760345458984
+Video,ca-netscience_greedypp.mp4,0.45243167877197266
+Video,ca-netscience_triangle_exact.mp4,0.3347320556640625
+Video,charikar_test_graph.mp4,0.14790821075439453
+Solution,ca-CSphd_charikar.npy,0.0001373291015625
+Solution,ca-CSphd_goldberg_exact.npy,0.00014495849609375
+Solution,ca-CSphd_greedypp.npy,0.00014495849609375
+Solution,ca-CSphd_triangle_exact.npy,0.00014495849609375
+Solution,ca-GrQc_charikar.npy,0.00029754638671875
+Solution,ca-GrQc_goldberg_exact.npy,0.00029754638671875
+Solution,ca-GrQc_greedypp.npy,0.00029754638671875
+Solution,ca-GrQc_triangle_exact.npy,0.00029754638671875
+Solution,ca-HepTh_charikar.npy,0.001033782958984375
+Solution,ca-HepTh_goldberg_exact.npy,0.001033782958984375
+Solution,ca-HepTh_greedypp.npy,0.001033782958984375
+Solution,ca-HepTh_triangle_exact.npy,0.001033782958984375
+Solution,ca-dblp-2012_charikar.npy,0.00055694580078125
+Solution,ca-dblp-2012_goldberg_exact.npy,0.000560760498046875
+Solution,ca-dblp-2012_greedypp.npy,0.000560760498046875
+Solution,ca-dblp-2012_triangle_exact.npy,0.00055694580078125
+Solution,ca-netscience_charikar.npy,0.000156402587890625
+Solution,ca-netscience_goldberg_exact.npy,0.000156402587890625
+Solution,ca-netscience_greedypp.npy,0.000156402587890625
+Solution,ca-netscience_triangle_exact.npy,0.000156402587890625

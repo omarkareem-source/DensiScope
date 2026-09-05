@@ -1,0 +1,21 @@
+Dataset,Algorithm,Objective,Nodes,Edges,Edge Density,Triangle Density,Runtime (s)
+ca-netscience,Charikar,Edge Density,9,36,4.0,,0.024531991999992897
+ca-netscience,Greedy++,Edge Density,9,36,4.0,,0.151099046000013
+ca-netscience,Goldberg Exact,Edge Density,9,36,4.0,,0.022342597000033493
+ca-netscience,Exact Triangle Density,Triangle Density,9,36,4.0,9.333333333333334,0.8644921650000015
+ca-CSphd,Charikar,Edge Density,4,5,1.25,,0.030201404999843362
+ca-CSphd,Greedy++,Edge Density,6,9,1.5,,0.7140636749998066
+ca-CSphd,Goldberg Exact,Edge Density,6,9,1.5,,0.044085064000000784
+ca-CSphd,Exact Triangle Density,Triangle Density,6,9,1.5,0.6666666666666666,0.1898035560000153
+ca-GrQc,Charikar,Edge Density,46,1030,22.391304347826086,,0.0641842469999574
+ca-GrQc,Greedy++,Edge Density,46,1030,22.391304347826086,,2.967600632000085
+ca-GrQc,Goldberg Exact,Edge Density,46,1030,22.391304347826086,,0.1190705369999705
+ca-GrQc,Exact Triangle Density,Triangle Density,46,1030,22.391304347826086,325.3478260869565,1.3438142609998067
+ca-HepTh,Charikar,Edge Density,239,28441,119.0,,0.5860188259998722
+ca-HepTh,Greedy++,Edge Density,239,28441,119.0,,9.132268729000089
+ca-HepTh,Goldberg Exact,Edge Density,239,28441,119.0,,0.294693690000031
+ca-HepTh,Exact Triangle Density,Triangle Density,239,28441,119.0,9401.0,1.0792833820000851
+ca-dblp-2012,Charikar,Edge Density,114,6441,56.5,,8.14525535000007
+ca-dblp-2012,Greedy++,Edge Density,115,6505,56.56521739130435,,277.386614367
+ca-dblp-2012,Goldberg Exact,Edge Density,115,6505,56.56521739130435,,2.847789552999984
+ca-dblp-2012,Exact Triangle Density,Triangle Density,114,6441,56.5,2109.3333333333335,0.7585965270000088

@@ -1,0 +1,6 @@
+dataset,nodes,edges,components,min_degree,max_degree,mean_degree,csr_memory_mb,raw_file,processed_file
+ca-netscience,379,914,1,1,34,4.823218997361478,0.010166168212890625,/content/drive/MyDrive/DensiScope/data/raw/ca-netscience/ca-netscience.mtx,/content/drive/MyDrive/DensiScope/data/processed/ca-netscience_csr.npz
+ca-CSphd,1882,1740,168,1,46,1.849096705632306,0.023777008056640625,/content/drive/MyDrive/DensiScope/data/raw/ca-CSphd/ca-CSphd.mtx,/content/drive/MyDrive/DensiScope/data/processed/ca-CSphd_csr.npz
+ca-GrQc,4158,13422,1,1,81,6.455988455988456,0.14386749267578125,/content/drive/MyDrive/DensiScope/data/raw/ca-GrQc/ca-GrQc.mtx,/content/drive/MyDrive/DensiScope/data/processed/ca-GrQc_csr.npz
+ca-HepTh,11204,117619,1,1,491,20.995894323455907,1.1644458770751953,/content/drive/MyDrive/DensiScope/data/raw/ca-HepTh/ca-HepPh.mtx,/content/drive/MyDrive/DensiScope/data/processed/ca-HepTh_csr.npz
+ca-dblp-2012,317080,1049866,1,1,343,6.622089062697111,11.221870422363281,/content/drive/MyDrive/DensiScope/data/raw/ca-dblp-2012/ca-dblp-2012.mtx,/content/drive/MyDrive/DensiScope/data/processed/ca-dblp-2012_csr.npz

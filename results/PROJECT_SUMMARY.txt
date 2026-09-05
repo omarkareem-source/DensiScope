@@ -1,0 +1,89 @@
+DENSISCOPE — FINAL PROJECT SUMMARY
+==================================
+
+PROJECT
+-------
+Densest Subgraph Discovery on Large Collaboration Networks
+
+DATASETS
+--------
+1. ca-netscience
+   379 vertices
+   914 edges
+
+2. ca-CSphd
+   1,882 vertices
+   1,740 edges
+
+3. ca-GrQc
+   4,158 vertices
+   13,422 edges
+
+4. ca-HepTh
+   11,204 vertices
+   117,619 edges
+
+5. ca-dblp-2012
+   317,080 vertices
+   1,049,866 edges
+
+
+ALGORITHMS
+----------
+1. Charikar
+2. Greedy++
+3. Goldberg Exact
+4. Exact Triangle Density
+
+
+IMPORTANT RESULTS
+-----------------
+
+ca-netscience
+Edge optimum = 4.000000
+Triangle optimum = 9.333333
+
+ca-CSphd
+Charikar = 1.250000
+Greedy++ = 1.500000
+Goldberg Exact = 1.500000
+
+ca-GrQc
+Exact edge density = 22.391304
+Exact triangle density = 325.347826
+
+ca-HepTh
+Edge optimum = 119.000000
+Triangle optimum = 9401.000000
+Dense structure = complete K239
+
+ca-dblp-2012
+Charikar edge density = 56.500000
+Greedy++ edge density = 56.565217
+Goldberg exact density = 56.565217
+Exact triangle density = 2109.333333
+
+
+KEY FINDINGS
+------------
+- Charikar is extremely fast and often reaches the exact optimum.
+- Greedy++ improves Charikar on ca-CSphd and ca-dblp-2012.
+- Greedy++ is considerably slower because it performs repeated peeling rounds.
+- Goldberg provides the exact edge-density reference solution.
+- Exact-safe preprocessing makes Goldberg practical even on DBLP.
+- DBLP was safely reduced from 317,080 vertices to 280 before Goldberg.
+- Edge-density and triangle-density optimization can select different communities.
+- ca-HepTh triangle density was certified through a complete K239 core.
+- DBLP triangle optimality was certified without constructing the full triangle max-flow network.
+
+
+BONUS FEATURES
+--------------
+- Runtime-growth analysis
+- Memory analysis
+- Approximation-quality analysis
+- Exact-safe preprocessing
+- Structural optimality certificates
+- Live execution visualization
+- MP4 visualizations
+- Interactive DensiScope dashboard
