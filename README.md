@@ -15,6 +15,23 @@ The system evaluates solution quality, runtime scalability, memory behavior, exa
 
 ---
 
+## Network Category and Applications
+
+DensiScope uses **Collaboration Networks**, where vertices represent researchers or authors and edges represent collaborative relationships such as co-authorship.
+
+Dense subgraphs in collaboration networks can reveal:
+
+- Strongly connected research groups
+- Highly collaborative scientific communities
+- Interdisciplinary research clusters
+- Core groups of frequently collaborating authors
+- Potential expert teams
+- Influential collaboration structures
+
+Analyzing dense communities in collaboration networks can help researchers understand how scientific collaboration is organized, identify tightly connected research groups, discover important scientific communities, and study collaboration patterns inside very large networks.
+
+---
+
 ## 1. Problem Definition
 
 For the ordinary **Densest Subgraph Problem (DSP)**, DensiScope maximizes:
@@ -423,7 +440,7 @@ DensiScope_FINAL.ipynb
 
 in Google Colab.
 
-### Step 2 — Install dependencies
+### Step 2 — Install Dependencies
 
 The required Python packages are listed in:
 
@@ -433,7 +450,7 @@ requirements.txt
 
 The notebook also installs or verifies the required dependencies automatically where necessary.
 
-### Step 3 — Run the notebook
+### Step 3 — Run the Notebook
 
 In Colab, select:
 
