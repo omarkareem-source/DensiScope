@@ -1,0 +1,12 @@
+numpy
+pandas
+scipy
+networkx
+matplotlib
+psutil
+requests
+python-igraph
+numba
+ipywidgets
+imageio
+imageio-ffmpeg
